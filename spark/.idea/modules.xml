@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/scala/scala.iml" filepath="$PROJECT_DIR$/scala/scala.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spark.iml" filepath="$PROJECT_DIR$/.idea/modules/spark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spark-build.iml" filepath="$PROJECT_DIR$/.idea/modules/spark-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkCore/sparkCore.iml" filepath="$PROJECT_DIR$/sparkCore/sparkCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkGraphx/sparkGraphx.iml" filepath="$PROJECT_DIR$/sparkGraphx/sparkGraphx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkMLlib/sparkMLlib.iml" filepath="$PROJECT_DIR$/sparkMLlib/sparkMLlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkSql/sparkSql.iml" filepath="$PROJECT_DIR$/sparkSql/sparkSql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkStreaming/sparkStreaming.iml" filepath="$PROJECT_DIR$/sparkStreaming/sparkStreaming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sparkTeach/sparkTeach.iml" filepath="$PROJECT_DIR$/sparkTeach/sparkTeach.iml" />
+    </modules>
+  </component>
+</project>

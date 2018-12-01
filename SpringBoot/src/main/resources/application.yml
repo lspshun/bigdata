@@ -1,0 +1,14 @@
+# 定义属性 将配置文件的属性赋给实体类
+my:
+  name: dylan
+  age: 18
+  number:  ${random.int}
+  uuid: ${random.uuid}
+  max: ${random.int(10)}
+  value: ${random.value}
+  greeting: hi,i'm  ${my.name}
+
+# 多个环境配置文件 test dev prod
+spring:
+  profiles:
+    active: dev

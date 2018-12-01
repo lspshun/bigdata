@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="sbt: org.scala-lang:scala-actors:2.10.7:jar">
+    <CLASSES>
+      <root url="jar://E:/Usersrep/sbt/.ivy2/cache/org.scala-lang/scala-actors/jars/scala-actors-2.10.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://E:/Usersrep/sbt/.ivy2/cache/org.scala-lang/scala-actors/srcs/scala-actors-2.10.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+如何检测一个变量是val还是var
+var是可变的 val是不可变的 只需要重新赋值就可以检测
+
+数字乘以字符串 "scal"*3   输出: scalascalascala  方法定义在StringOps中
+
+10 max 2  输出 10   Java中无此方法 定义在RichInt中
+
+Bignt 计算2的1024次方
+BigInt(2).pow(1024)
+
+获取"hello" 的首尾字符
+"hello"(0)  "hello".take(1)
+"hello".reverse(0)  "hello".take(1)

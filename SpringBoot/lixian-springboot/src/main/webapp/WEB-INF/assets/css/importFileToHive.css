@@ -1,0 +1,20 @@
+.select {
+    /* 鼠标滑上样式 */
+    cursor: pointer;
+}
+
+.plus, .reduce {
+    color: white;
+    background-color: deepskyblue;
+    font-weight: bold;
+    /* border-radius的值等于height的一半 */
+    border-radius: 12px;
+    /* 声明为块级元素，以行内元素的方式排列 */
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    /* 垂直居中：line-height值等于height属性值 */
+    line-height: 24px;
+    /* 水平居中 */
+    text-align: center;
+}

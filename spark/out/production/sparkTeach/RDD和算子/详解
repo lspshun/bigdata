@@ -1,0 +1,67 @@
+RDD Resilient Distributed Datasets 弹性分布式数据集
+不可变 可分区 其中的元素可以并行计算，
+只能通过在其他RDD执行确定的转换操作而创建，
+或从文件中读取生成等，可以将RDD看做Spark的一个对象
+ 一组分片
+数据集的基本单位，对于RDD来说，每个分片都会被一个计算任务处理，用户可以在创建RDD时指定分片个数，
+如果没有指定则采用默认值  一个分片可以理解为最小计算单元
+
+ 函数作用在每个分片上
+Spark中的RDD的计算是以分片为单位的，每个RDD都会实现compute函数，会对迭代器进行复合，不需要保存每次的计算的结果
+
+ RDD之间是一系列的依赖
+RDD每次转换都会生成一个新的RDD，所以RDD之间就会形成前后依赖的关系。在部分分区数据丢失时，
+Spark可以通过依赖关系重新计算丢失的分区数据，而不需要对RDD的所有分区进行重新计算
+
+ 对于key-values形式的RDD的分片函数
+目前Spark中实现了两种类型的分片函数，一个是基于哈希的HashPartitioner，
+另外一个是基于范围的RangePartitioner。只有对于key-value形式的RDD才有Partitioner，
+其他形式的RDD的Partitioner的值为None。Partitioner函数不但决定了RDD本身的分片数量，也决定了Shuffle输出时的分片数量
+
+ 一个存储存取每个分片优先位置的列表
+对于一个HDFS文件，这个列表保存的是每个Partition所在的块的位置，
+按照“移动数据不如移动计算”的理念，Spark在进行任务调度时会尽可能地将计算任务分配到所要处理数据块的存储位置
+
+创建RDD
+
+通过已有的集合结构创建
+
+    val rdd = sc.parallelize(Array(1,2,3,4,5,6))
+    val rdd = sc.makeRDD(Seq(1,2,3,4,5,6))
+
+由外部存储系统的数据集创建，包括本地文件和所有Hadoop支持的数据集
+
+    val rdd = sc.textFile("file:///home/bigdata/data.txt")
+    val rdd = sc.textFile("hdfs://SZ01:8020/input/data.txt")
+
+
+PairRDD
+
+键值对RDD，Spark中转换操作常用的数据类型，提供了并行操作或跨结点重新进行分组的操作接口。
+
+- 手动构建
+
+    val list = List((1,1),(2,2),(3,3))
+    val pairRDD = sc.parallelize(list)
+    val resultRDD = pairRDD.collect
+    // 结果: Array((1,1), (2,2), (3,3))
+
+- 通过转换算子获得
+
+    val list = List(1,2,3,4,5)
+    val listRDD = sc.parallelize(list)
+    val pairRDD = listRDD.map(value => (value,value))
+    val resultRDD = pairRDD.collect
+    // 结果: Array[(Int, Int)] = Array((1,1), (2,2), (3,3), (4,4), (5,5))
+
+
+RDD编程API
+
+RDD中的所有转换都是延迟加载的，具有懒惰的属性，并不会直接计算得出结果，只是对转换的操作进行记录，当发生一个要求返回结果的动作时，转换才会真正的运行。
+
+map(function):返回一个新的RDD，该RDD由原RDD中的每个元素经过function转换后组成
+filter(function):返回一个新的RDD，该RDD由原RDD中满足函数中的条件的元素组成
+flatMap(function):返回一个新的RDD，该RDD由原RDD中的每个元素经过function转换后再压平得到
+mapPartitions(function):返回一个新的RDD，将传入的函数作用在每个分片上，传入函数的签名为Iterator[T] => Iterator[U]
+mapPartitionsWithIndex(function):返回一个新的RDD，与mapPartitions相似，其中的整型参数代表分区索引
+sample(withReplacement,fraction,seed):返回一个新的RDD，从原RDD中进行采样，withReplacement用于指定是否放回，fraction指定采样比例，seed用于指定种子值

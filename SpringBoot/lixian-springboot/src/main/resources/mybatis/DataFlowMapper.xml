@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dylan.demo.dao.DataFlowMapper">
+
+    <!-- 单条插入 -->
+    <insert id="insertOne" parameterType="dataFlow" useGeneratedKeys="true" keyProperty="flow_id">
+        insert into data_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            flow_name,
+            flow_type,
+            flow_status,
+            source_id
+            <if test="mr_name != null">
+                ,mr_name
+            </if>
+            <if test="hive_sql != null">
+                ,hive_sql
+            </if>
+            ,user_id
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{flow_name,jdbcType=VARCHAR},
+            #{flow_type,jdbcType=VARCHAR},
+            #{flow_status,jdbcType=VARCHAR},
+            #{source_id,jdbcType=INTEGER}
+            <if test="mr_name != null">
+                ,#{mr_name,jdbcType=VARCHAR}
+            </if>
+            <if test="hive_sql != null">
+                ,#{hive_sql,jdbcType=VARCHAR}
+            </if>
+            ,#{user_id,jdbcType=INTEGER}
+        </trim>
+    </insert>
+</mapper>
